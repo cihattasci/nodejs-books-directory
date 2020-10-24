@@ -1,0 +1,19 @@
+{
+  "name": "nodejs-books-directory",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cihattasci/nodejs-books-directory.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cihattasci/nodejs-books-directory/issues"
+  },
+  "homepage": "https://github.com/cihattasci/nodejs-books-directory#readme"
+}
