@@ -4,7 +4,7 @@ const PORT = process.env.PORT || 3000;
 const Book = require('./api/models/bookDirectoryModel');
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/book', {
+mongoose.connect('mongodb+srv://cihat:cihat123.@realmcluster.kbrok.mongodb.net/test', {
     useNewUrlParser: true, 
     useUnifiedTopology: true, 
     useCreateIndex: true
@@ -12,30 +12,47 @@ mongoose.connect('mongodb://localhost:27017/book', {
 
 app.use(express.json());
 
-app.get('/list_all_book', (req, res) => {
+app.get('/list_all_book', async (req, res) => {
 
-    res.send('hello');
+    await Book.find({}).then(books => res.send(books)).catch(e => res.send(e));
 });
 
-app.post('/save_book', (req, res) => {
-    const book = new Book(req.body);
+app.post('/save_book', async (req, res) => {
 
-    book.save().then((book) => {
-        res.send(book);
+    const book = new Book({
+        title: 'Acımak',
+        author: 'Reşat Nuri Güntekin',
+        pageNumber: 132
     });
 
-    res.send(book);
+    await book.save((error, result) => {
+        try {
+            res.send(result);
+        } catch (error) {
+            res.send(error);
+        };
+        
+    })
     
 });
 
-app.put('/update_book', (req, res) => {
+app.put('/update_book', async (req, res) => {
 
-    res.send('update_book'); 
+    await Book.updateOne({title: 'Acımak'}, {title: 'Acımak', author: 'Reşat Nuri Güntekin', pageNumber: 123})
+        .then(async ()=>{
+            await Book.find({title: 'Acımak'})
+                .then(book => res.send(book))
+                .catch(e => res.send(e));
+        })
+        .catch(e => res.send(e));
 });
 
-app.delete('/delete_book', (req, res) => {
+app.delete('/delete_book', async (req, res) => {
 
-    res.send('delete_book');
+    await Book.deleteOne({author: 'Goethe'})
+        .then(async () => {
+            await Book.find({}).then(books => res.send(books)).catch(e => res.send(e));
+        });
 });
 
 
