@@ -5,7 +5,9 @@ const BookSchema = new Schema({
     title: String,
     author: String,
     pageNumber: Number,
-})
+}, {
+    timestamps: true
+});
 
 var Book = mongoose.model('Book', BookSchema);
 

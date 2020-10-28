@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
+require('dotenv').config();
 
-mongoose.connect('mongodb+srv://cihat:cihat123.@realmcluster.kbrok.mongodb.net/test', {
+mongoose.connect(process.env.DATABASE, {
     useNewUrlParser: true, 
     useUnifiedTopology: true, 
     useCreateIndex: true
