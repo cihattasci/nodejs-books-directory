@@ -31,11 +31,7 @@ const save_book = async (req, res) => {
     });
 
     await book.save((error, result) => {
-
-        if (error){
-            return res.send(error);
-        };
-
+        
         try {
             res.send(result);
         } catch (error) {
